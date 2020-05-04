@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block body %}
+    {{ content.story }}
+    <p>
+    {% for answer, question in questions.items %}
+        {% if question %}
+            <a href="{% url "RPG:content" question %}" >{{ answer }}</a>
+            <p>
+        {%  endif %}
+    {% endfor %}
+{% endblock %}
