@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block body %}
+    {{ content.story }}
+    <p>
+    {% if Fight %}
+        <a href="{% url "RPG:content" page_number %}" >{{ "Продолжить схватку" }}</a>
+        <p>
+    {% else %}
+        {% for answer, question in questions.items %}
+            <a href="{% url "RPG:content" question %}" >{{ answer }}</a>
+        {% endfor %}
+        <p>
+    {%  endif %}
+
+{% endblock %}
