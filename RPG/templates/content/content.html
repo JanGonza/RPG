@@ -2,6 +2,17 @@
 {% block body %}
     {{ content.story }}
     <p>
+    {% if monster_stats and profile_stats %}
+        Ваши показатели:
+        <p>
+        Выносливость - {{ profile_stats.stamina }} Мастерство - {{ profile_stats.mastery }} Урон - {{ profile_stats.damage }}
+        <p>
+        Показатели оппонента:
+        <p>
+        Выносливость - {{ monster_stats.stamina }} Мастерство - {{ monster_stats.mastery }} Урон - {{ monster_stats.damage }}
+        <p>
+
+    {% endif %}
     {% for answer, question in questions.items %}
         {% if question %}
             <a href="{% url "RPG:content" question %}" >{{ answer }}</a>
