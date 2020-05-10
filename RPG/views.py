@@ -5,6 +5,10 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
 
+def start_page(request):
+    return render(request, 'index.html')
+
+
 def fight_status(user, monster_id):
     """Создание словаря с текущими характеристиками
 
@@ -40,29 +44,21 @@ def story_page(user, page_number, param=None):
     storyline = get_object_or_404(models.RPG,
                                   page_number=page_number,
                                   )
+
     if param == "start_fight":
-        questions = {storyline.answer_choice_1: page_number,
-                     storyline.answer_choice_2: storyline.answer_link_2,
-                     storyline.answer_choice_3: storyline.answer_link_3,
-                     storyline.answer_choice_4: storyline.answer_link_4,
-                     storyline.answer_choice_5: storyline.answer_link_5}
-        return questions
+        questions = {storyline.answer_choice_1: page_number}
 
     elif param == "fight":
-        questions = {"Продолжить схватку": page_number,
-                     storyline.answer_choice_2: storyline.answer_link_2,
-                     storyline.answer_choice_3: storyline.answer_link_3,
-                     storyline.answer_choice_4: storyline.answer_link_4,
-                     storyline.answer_choice_5: storyline.answer_link_5}
-        return questions
+        questions = {"Продолжить схватку": page_number}
 
     else:
-        questions = {storyline.answer_choice_1: storyline.answer_link_1,
-                     storyline.answer_choice_2: storyline.answer_link_2,
-                     storyline.answer_choice_3: storyline.answer_link_3,
-                     storyline.answer_choice_4: storyline.answer_link_4,
-                     storyline.answer_choice_5: storyline.answer_link_5}
-        return questions
+        questions = {storyline.answer_choice_1: storyline.answer_link_1}
+
+    questions[storyline.answer_choice_2] = storyline.answer_link_2
+    questions[storyline.answer_choice_3] = storyline.answer_link_3
+    questions[storyline.answer_choice_4] = storyline.answer_link_4
+    questions[storyline.answer_choice_5] = storyline.answer_link_5
+    return questions
 
 
 @login_required
@@ -132,3 +128,4 @@ def content(request, page_number):
                            'questions': questions})
     else:
         HttpResponse("not login user")
+
