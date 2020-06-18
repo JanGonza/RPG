@@ -19,4 +19,13 @@
             <p>
         {%  endif %}
     {% endfor %}
+    {%if user_crystal %}
+        <a href="{% url "RPG:crystal" %}" > Использовать магический кристал </a>
+        <p>
+        Кристалы в наличии:
+        <p>
+        {% for name, count in user_crystal.items %}
+            {{ name }}: {{ count }} |
+        {% endfor %}
+    {% endif %}
 {% endblock %}

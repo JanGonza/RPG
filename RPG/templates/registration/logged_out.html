@@ -3,9 +3,9 @@
 
 {% block content %}
     <h2> logout</h2>
-   logout win. You can login again:
+   Вы успешно разлогинились:
     <p>
-        <a href="{% url "RPG:login" %}">LOGIN</a>
+        <a href="{% url "RPG:start_page" %}">Переход на стартовую страницу</a>
     </p>
     <form action="." method="post">
         {{ form.as_p }}

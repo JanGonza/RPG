@@ -5,6 +5,14 @@
     <title>Адское болото</title>
 </head>
 <body>
+<header>
+    {% if request.user.is_authenticated %}
+        HI {{ request.user.first_name }}
+        <a href="{% url "RPG:logout" %}">logout</a>
+    {% else %}
+        <a href="{% url "RPG:login" %}">login</a>
+    {% endif %}
+</header>
 {% block content %}
 
 {% endblock %}

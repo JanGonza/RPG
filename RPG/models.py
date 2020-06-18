@@ -25,10 +25,10 @@ class Items(models.Model):
 
 class Crystal(models.Model):
     crystal_name = models.CharField(blank=False, null=False, max_length=100)
-    regeneration = models.IntegerField(blank=False, null=False)
-    stamina = models.IntegerField(blank=False, null=False)
-    mastery = models.IntegerField(blank=False, null=False)
-    damage = models.IntegerField(blank=False, null=False)
+    # regeneration = models.IntegerField(blank=False, null=False)
+    # stamina = models.IntegerField(blank=False, null=False)
+    # mastery = models.IntegerField(blank=False, null=False)
+    # damage = models.IntegerField(blank=False, null=False)
 
     def __str__(self):
         return self.crystal_name
@@ -61,6 +61,11 @@ class Profile(models.Model):
 
 
 class RPG(models.Model):
+    crystal_name = models.ForeignKey(Crystal,
+                                     blank=True,
+                                     null=True,
+                                     on_delete=models.PROTECT,
+                                     )
     monster = models.ForeignKey(Monster,
                                 blank=True,
                                 null=True,

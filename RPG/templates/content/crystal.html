@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+    {% for key, value in inventory.items %}
+        {% if value %}
+            <a href="{% url "RPG:use_crystal" key %}" > Использовать магический кристалл {{ key }} </a>
+            <p>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
